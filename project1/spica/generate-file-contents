@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+max_size = 127
+input = ARGF.read
+content = input[0, max_size]
+puts([content.size].pack("C") + content)

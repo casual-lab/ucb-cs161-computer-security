@@ -1,0 +1,24 @@
+#!/usr/bin/env python2
+
+from scaffold import *
+
+# Example send:
+p.send('test\\x41\n')
+
+# Example receive:
+assert p.recv(5) == 'testA'
+
+# HINT: the last line of your exploit should look something like:
+#   p.send('A' * m + canary + 'B' * n + rip + SHELLCODE + '\n')
+# where m, canary, n and rip are all values you must determine
+# and you might need to add a '\x00' somewhere
+
+### YOUR CODE STARTS HERE ###
+
+
+### YOUR CODE ENDS HERE ###
+
+returncode = p.end()
+
+if returncode == -11: print 'segmentation fault or stack canary!'
+elif returncode != 0: print 'return code', returncode
